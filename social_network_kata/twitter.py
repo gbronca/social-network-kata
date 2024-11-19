@@ -1,9 +1,11 @@
 from .io import IO
+from .clock import Clock
 
 class Twitter:
     
-    def __init__(self, io: IO) -> None:
+    def __init__(self, io: IO, clock: Clock) -> None:
         self.io = io
+        self.clock = clock
         
     def run(self):
         while True:
