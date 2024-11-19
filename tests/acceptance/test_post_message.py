@@ -1,11 +1,8 @@
 
-import sys
-import unittest
 from unittest.mock import Mock
 from social_network_kata.io import IO
+from social_network_kata.twitter import Twitter
 
-    
-    
 class TestPostMessage:
     def test_user_can_post_message_to_timeline(self, capsys):
         io = Mock(IO)
@@ -13,7 +10,6 @@ class TestPostMessage:
         twitter = Twitter(io)
         
         twitter.run()
-        
         
         capture = capsys
 
