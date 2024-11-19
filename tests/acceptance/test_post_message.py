@@ -1,9 +1,20 @@
 
+import sys
+import unittest
+from unittest.mock import Mock
+from social_network_kata.io import IO
+
+    
+    
 class TestPostMessage:
     def test_user_can_post_message_to_timeline(self, capsys):
-        twitter = Twitter()
-        twitter.command("Alice -> I love the weather today")
-        capture = capsys.readouterr()
+        io = Mock(IO)
+        io.read.side_effect = ["Alice -> I love the weather today", "Alice"]
+        twitter = Twitter(io)
+        
+        twitter.run()
+        
+        
+        capture = capsys
 
-        twitter.command("Alice")
         assert capture.out == "I love the weather today\n"
