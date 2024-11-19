@@ -2,6 +2,7 @@ from unittest.mock import Mock
 from social_network_kata.clock import Clock
 from social_network_kata.io import IO
 from social_network_kata.twitter import Twitter
+from social_network_kata.post_repository import PostRepository
 
 
 class TestTwitter:
@@ -18,4 +19,12 @@ class TestTwitter:
         
     
     def test_can_post(self, capsys):
-        pass
+        io = Mock(IO)
+        clock = Mock(Clock)
+        
+        repo = Mock(PostRepository)
+        twitter = Twitter(io, clock, repo)
+        
+        twitter.create_post("Dave -> Hello")
+        
+        repo.create_post.assert_called_with("Dave -> Hello")
