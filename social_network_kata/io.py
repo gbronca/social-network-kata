@@ -7,4 +7,4 @@ class IO:
     
     @staticmethod
     def read():
-        return sys.stdin.read()
+        return input()
