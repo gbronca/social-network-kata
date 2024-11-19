@@ -18,4 +18,4 @@ class Twitter:
         print('Bye!')
         
     def create_post(self, content: str):
-        raise NotImplementedError
+        self.post_repo.create_post(content)

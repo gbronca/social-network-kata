@@ -1,2 +1,3 @@
 class PostRepository:
-    pass
+    def create_post(self):
+        raise NotImplementedError

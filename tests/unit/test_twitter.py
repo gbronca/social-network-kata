@@ -9,7 +9,9 @@ class TestTwitter:
     def test_can_start_and_stop(self, capsys):
         io = Mock(IO)
         clock = Mock(Clock)
-        twitter = Twitter(io, clock)
+        post_repo = Mock(PostRepository)
+        twitter = Twitter(io, clock, post_repo)
+        
         io.read.side_effect = ["exit"]
         twitter.run()
         
@@ -22,9 +24,9 @@ class TestTwitter:
         io = Mock(IO)
         clock = Mock(Clock)
         
-        repo = Mock(PostRepository)
-        twitter = Twitter(io, clock, repo)
+        post_repo = Mock(PostRepository)
+        twitter = Twitter(io, clock, post_repo)
         
         twitter.create_post("Dave -> Hello")
         
-        repo.create_post.assert_called_with("Dave -> Hello")
+        post_repo.create_post.assert_called_with("Dave -> Hello")
