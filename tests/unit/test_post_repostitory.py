@@ -15,4 +15,4 @@ class TestPostRepository:
         
         post_repo.create_post(name,message)
 
-        assert post_repo.get_posts() == [Post(clock.get_time.return_value, name, message)]
+        assert post_repo.get_posts() == [Post(clock.get_date.return_value, name, message)]
