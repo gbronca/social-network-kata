@@ -11,7 +11,7 @@ class TestPostMessage:
         clock = Mock(Clock)
         post_repo = Mock(PostRepository)
         io.read.side_effect = ["Alice -> I love the weather today", "Alice", "exit"]
-        clock.get_time_difference.side_effect = ["5 Minutes"]
+        clock.get_time_difference.side_effect = ["5 minutes"]
         twitter = Twitter(io,clock, post_repo)
         
         twitter.run()
