@@ -4,7 +4,7 @@ class PostRepository:
 
     def __init__(self, clock: Clock):
         self.clock = clock
-        self.posts = []
+        self.posts: list[Post] = []
 
     def create_post(self, name: str, message: str) -> None:
         time = self.clock.get_date()
