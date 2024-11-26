@@ -35,14 +35,16 @@ class TestTwitter:
         
         post_repo.create_post.assert_called_with("Dave","Hello")
 
-    # def test_can_get_wall(self, capsys):
-    #     io = Mock(IO)
-    #     clock = Mock(Clock)
+    
+    def test_can_get_wall(self):
+        io = Mock(IO)
+        clock = Mock(Clock)
+        io.read.side_effect = ["Dave", "exit"]
+        post_repo = Mock(PostRepository)
+        command_parser = Mock(CommandParser)
+        command_parser.parse_command.side_effect = [("WALL", ["Dave"])]
+        twitter = Twitter(io, clock, post_repo, command_parser)
+
+        twitter.run()
         
-    #     post_repo = Mock(PostRepository)
-    #     twitter = Twitter(io, clock, post_repo)
-        
-    #     twitter.create_post("Mary -> Why")
-    #     twitter.get_wall("")
-        
-    #     post_repo.create_post.assert_called_with("Mary -> Why")
+        post_repo.get_wall.assert_called_with("Dave")
