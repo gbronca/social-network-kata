@@ -1,7 +1,7 @@
 from social_network_kata.post import Post
 from social_network_kata.clock import Clock
-class PostRepository:
 
+class PostRepository:
     def __init__(self, clock: Clock):
         self.clock = clock
         self.posts: list[Post] = []
@@ -15,4 +15,4 @@ class PostRepository:
         return self.posts
     
     def get_posts_by_user(self, name: str) -> list[Post]:
-        return [post for post in self.posts if post[1] == name]
+        return [post for post in self.posts if post.name]
