@@ -36,11 +36,12 @@ class TestTwitter:
         post_repo.create_post.assert_called_with("Dave","Hello")
 
     
-    def test_can_get_posts_by_user(self):
+    def test_can_get_a_users_posts(self):
         io = Mock(IO)
         clock = Mock(Clock)
         io.read.side_effect = ["Dave", "exit"]
         post_repo = Mock(PostRepository)
+        post_repo.get_posts_by_user.return_value = []
         command_parser = Mock(CommandParser)
         command_parser.parse_command.side_effect = [("READ", ["Dave"])]
         twitter = Twitter(io, clock, post_repo, command_parser)

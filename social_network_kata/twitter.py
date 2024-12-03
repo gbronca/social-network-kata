@@ -1,8 +1,11 @@
 from .io import IO
 from .clock import Clock
-from .post_repository import PostRepository
 from .command_parser import CommandParser
 from .post import Post
+from .post_formatter import PostFormatter
+from .post_repository import PostRepository
+
+
 
 class Twitter:
     
@@ -19,14 +22,23 @@ class Twitter:
                 break
 
             action, args = self.command_parser.parse_command(command)
-            
+
+            if action not in ["POST", "READ"]:
+                return ValueError
+
             if action == "POST":
                 name, message = args
                 self.create_post(name, message)
 
             if action == "READ":
                 name = args[0]
-                self.get_posts_by_user(name)
+                posts = self.get_posts_by_user(name)
+                post_formatter = PostFormatter(self.clock)
+                formatted_posts = post_formatter.format_posts(posts=posts)
+                for post in formatted_posts:
+                    print(post)
+
+
             
         print('Bye!')
         
