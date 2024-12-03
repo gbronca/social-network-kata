@@ -18,12 +18,12 @@ class PostFormatter:
 
         return formatted_posts
 
-    def format_time(self, read_time, post_time):
-        time_delta = self.clock.get_time_difference(read_time, post_time)
+    @staticmethod
+    def format_time(read_time, post_time):
+        time_delta = read_time - post_time
         total_seconds = time_delta.total_seconds()
         hours, remainder = divmod(total_seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-
         if hours:
             return f"{int(hours)} hours"
 

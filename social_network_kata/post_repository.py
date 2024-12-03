@@ -13,6 +13,6 @@ class PostRepository:
 
     def get_posts(self) -> list[Post]:
         return self.posts
-    
+
     def get_posts_by_user(self, name: str) -> list[Post]:
         return [post for post in self.posts if post.name]

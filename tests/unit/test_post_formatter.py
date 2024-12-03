@@ -13,12 +13,9 @@ class TestPostFormatter:
     @pytest.mark.parametrize("input, output", [("Ned", "Winter is coming"), ("Frink", "Zoinks"), ("ZoidBerg", "Why not Zoidberg?")])
     def test_can_format_posts(self, input, output):
         clock = Mock(Clock)
-        clock.get_date.return_value = datetime.now()
         post_time = datetime(2024, 12, 3, 10, 45)
         read_time = datetime(2024, 12, 3, 10, 50)
-        clock.get_date.side_effect = [post_time, read_time]
-        clock.get_time_difference.return_value = read_time - post_time
-
+        clock.get_date.return_value = read_time
         posts = [
             Post(post_time, input, output),
         ]
@@ -35,7 +32,6 @@ class TestPostFormatter:
         read_time = datetime(2024, 12, 3, 10, 50)
         post_time = datetime(2024, 12, 3, 10, 45)
         post_formatter = PostFormatter(clock)
-        clock.get_time_difference.return_value = (read_time - post_time)
 
         formatted_time = post_formatter.format_time(read_time, post_time)
 
