@@ -2,6 +2,7 @@ from .io import IO
 from .clock import Clock
 from .post_repository import PostRepository
 from .command_parser import CommandParser
+from .post import Post
 
 class Twitter:
     
@@ -18,11 +19,19 @@ class Twitter:
                 break
 
             action, args = self.command_parser.parse_command(command)
+            
             if action == "POST":
                 name, message = args
                 self.create_post(name, message)
+
+            if action == "READ":
+                name = args[0]
+                self.get_posts_by_user(name)
             
         print('Bye!')
         
     def create_post(self, name: str, message: str):
         self.post_repo.create_post(name, message)
+
+    def get_posts_by_user(self, name: str) -> list[Post]:
+        return self.post_repo.get_posts_by_user(name)

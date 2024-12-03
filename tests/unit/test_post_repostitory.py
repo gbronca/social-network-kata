@@ -16,3 +16,14 @@ class TestPostRepository:
         post_repo.create_post(name,message)
 
         assert post_repo.get_posts() == [Post(clock.get_date.return_value, name, message)]
+
+    def test_can_get_posts_by_user(self):
+        clock = Mock(Clock)
+        clock.get_date.return_value = datetime.now()
+        post_repo = PostRepository(clock)
+        names = ["Bob", "McBob"]
+        messages = ["Good","bye"]
+        
+        post_repo.create_post(names[0],messages[0])
+
+        assert post_repo.get_posts_by_user(names[0]) == [Post(clock.get_date.return_value, names[0], messages[0])]
